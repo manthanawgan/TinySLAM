@@ -31,8 +31,7 @@ def input_img(path: Path):
     # ret, frame2 = cap.read()
 
     cap.release()
-    input_frames = frame_t, frame_t2
 
-    return input_frames
+    return frame_t, frame_t2
 
 

@@ -18,7 +18,7 @@ class SLAM():
         self.K = K
 
 
-    def feature_extraction(input_img, nfeatures = 5000): 
+    def feature_extraction(path: Path, nfeatures = 5000): 
         """
         feature point is composed of two parts: key points and descriptors
 
@@ -32,13 +32,16 @@ class SLAM():
         """  
         
         orb = cv2.ORB_create(nfeatures)
+        img1, img2 = input_img(path)
 
-        keypoints, descriptors = orb.detectAndCompute()
+        kp1, des1 = orb.detectAndCompute(img1, None)
+        kp2, des2 = orb.detectAndCompute(img2, None)
 
-        if len(keypoints) == len(descriptors):
-            for i in range(len(keypoints)):
-                matches = cv2.
+        bf = cv2.BFMatcher(cv2.NORM_HAMMING)
+        matches = bf.match(des1, des2)
 
+        #sorting matches by distance
+        matches = sorted(matches, key = lambda x: x.distance)
         
 
     
